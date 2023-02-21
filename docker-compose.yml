@@ -1,6 +1,22 @@
 version: "3.8"
 
 services:
+  levels_service:
+    container_name: levels-service
+    build: .
+    image: morsof48/levels-service:latest
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: user
+      DB_PASSWORD: admin
+      DB_NAME: postgres
+      RESOURCES_PROVIDER_BASE_URL: http://localhost:3102
+    ports:
+      - "3101:3001"
+    depends_on:
+      - db
+
   resources_service:
     container_name: resources_service
     build: .
@@ -11,6 +27,7 @@ services:
       DB_USERNAME: user
       DB_PASSWORD: admin
       DB_NAME: postgres
+      GAME_NAME: rings-quest
     ports:
       - "3102:3002"
     depends_on:

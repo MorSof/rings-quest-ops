@@ -34,7 +34,7 @@ OpenApi (Swagger) is exposed here http://localhost:3555/api
 
 
 ## DB creation locally
-After your docker-compose is up, you'll nee to create a DB: 
+After your docker-compose is up, you'll need to create a DB: 
 1. Navigate to [pdAdmin](http://localhost:5050/browser/)
 2. Press on the "Add New Server" Button, a popup window will appear.
 3. On the general tab name your server "rings_quest"

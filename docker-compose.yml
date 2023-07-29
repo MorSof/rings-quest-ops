@@ -1,23 +1,21 @@
 version: "3.8"
 
 services:
-
-  levels_service:
-    container_name: levels-service
+  resources_service:
+    container_name: resources-service
     build: .
-    image: morsof48/levels-service:latest
+    image: morsof48/resources-service:latest
     environment:
       DB_HOST: db
       DB_PORT: 5432
       DB_USERNAME: user
       DB_PASSWORD: admin
       DB_NAME: postgres
-      BARS_PROVIDER_BASE_URL: http://bars_service:3005
+      GAME_NAME: rings-quest
     ports:
-      - "3101:3001"
+      - "3102:3002"
     depends_on:
       - db
-      - resources_service
 
   bars_service:
     container_name: bars-service
@@ -34,22 +32,45 @@ services:
       - "3105:3005"
     depends_on:
       - db
+      - resources_service
 
-  resources_service:
-    container_name: resources-service
+  levels_service:
+    container_name: levels-service
     build: .
-    image: morsof48/resources-service:latest
+    image: morsof48/levels-service:latest
     environment:
       DB_HOST: db
       DB_PORT: 5432
       DB_USERNAME: user
       DB_PASSWORD: admin
       DB_NAME: postgres
-      GAME_NAME: rings-quest
+      BARS_PROVIDER_BASE_URL: http://bars_service:3005
     ports:
-      - "3102:3002"
+      - "3101:3001"
     depends_on:
       - db
+      - bars_service
+
+  players_service:
+    container_name: players-service
+    build: .
+    image: morsof48/players-service:latest
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: user
+      DB_PASSWORD: admin
+      DB_NAME: postgres
+      BARS_PROVIDER_BASE_URL: http://bars_service:3005
+      RESOURCES_PROVIDER_BASE_URL: http://resources_service:3002
+      LEVELS_PROVIDER_BASE_URL: http://resources_service:3001
+    ports:
+      - "3103:3003"
+    depends_on:
+      - db
+      - resources_service
+      - bars_service
+      - levels_service
 
   db:
     image: postgres

@@ -63,7 +63,7 @@ services:
       DB_NAME: postgres
       BARS_PROVIDER_BASE_URL: http://bars_service:3005
       RESOURCES_PROVIDER_BASE_URL: http://resources_service:3002
-      LEVELS_PROVIDER_BASE_URL: http://resources_service:3001
+      LEVELS_PROVIDER_BASE_URL: http://levels_service:3001
     ports:
       - "3103:3003"
     depends_on:

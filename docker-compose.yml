@@ -20,7 +20,7 @@ services:
   bars_service:
     container_name: bars-service
     build: .
-    image: morsof48/bars-service:latest
+    image: 224983445169.dkr.ecr.eu-north-1.amazonaws.com/bars-service:latest
     environment:
       DB_HOST: db
       DB_PORT: 5432
@@ -37,7 +37,7 @@ services:
   levels_service:
     container_name: levels-service
     build: .
-    image: morsof48/levels-service:latest
+    image: 224983445169.dkr.ecr.eu-north-1.amazonaws.com/levels-service:latest
     environment:
       DB_HOST: db
       DB_PORT: 5432
@@ -54,7 +54,7 @@ services:
   players_service:
     container_name: players-service
     build: .
-    image: morsof48/players-service:latest
+    image: 224983445169.dkr.ecr.eu-north-1.amazonaws.com/players-service:latest
     environment:
       DB_HOST: db
       DB_PORT: 5432
